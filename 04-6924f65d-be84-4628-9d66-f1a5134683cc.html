@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 4 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 4</h1>
+        <p class="sous-titre">Le responsive</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 4.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qcm1",
+        "intitule": "Pour quels écrans s'appliquent les règles écrites dans `@media (max-width: 767px)` ?",
+        "choix": [
+            {
+                "texte": "Les écrans de plus de 767 px",
+                "correct": false
+            },
+            {
+                "texte": "Les écrans de 767 px de large ou moins",
+                "correct": true
+            },
+            {
+                "texte": "Uniquement les écrans de 767 px exactement",
+                "correct": false
+            },
+            {
+                "texte": "Tous les écrans",
+                "correct": false
+            }
+        ],
+        "explication": "`max-width` signifie « jusqu'à cette largeur maximale »."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Votre site utilise `@media (max-width: 1023px)` et `@media (max-width: 767px)`. Sur un écran de 1024 px de large exactement, quelles media queries s'appliquent ?",
+        "choix": [
+            {
+                "texte": "Celle de la tablette (`max-width: 1023px`)",
+                "correct": false
+            },
+            {
+                "texte": "Celle du mobile (`max-width: 767px`)",
+                "correct": false
+            },
+            {
+                "texte": "Les deux",
+                "correct": false
+            },
+            {
+                "texte": "Aucune : c'est la version ordinateur",
+                "correct": true
+            }
+        ],
+        "explication": "1024 est supérieur à 1023 : aucune condition n'est remplie."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Et sur un écran de 600 px de large ?",
+        "choix": [
+            {
+                "texte": "Seulement celle de la tablette",
+                "correct": false
+            },
+            {
+                "texte": "Seulement celle du mobile",
+                "correct": false
+            },
+            {
+                "texte": "Les deux",
+                "correct": true
+            },
+            {
+                "texte": "Aucune",
+                "correct": false
+            }
+        ],
+        "explication": "600 est inférieur à 1023 et à 767. C'est pour ça que la media query mobile doit être écrite après celle de la tablette."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pourquoi faut-il placer les media queries à la fin de la feuille de style ?",
+        "choix": [
+            {
+                "texte": "C'est une obligation de la syntaxe CSS",
+                "correct": false
+            },
+            {
+                "texte": "Parce qu'à sélecteur équivalent, la dernière règle l'emporte : placées au début, elles seraient écrasées par les règles suivantes",
+                "correct": true
+            },
+            {
+                "texte": "Pour que la page se charge plus vite",
+                "correct": false
+            },
+            {
+                "texte": "Pour que le validateur les accepte",
+                "correct": false
+            }
+        ],
+        "explication": "C'est le principe de la cascade, vu dans la partie 2."
+    },
+    {
+        "type": "qroc",
+        "intitule": "À quoi sert la balise `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">` ?",
+        "reponse": "À adapter la largeur de la page à celle de l'écran de l'appareil.",
+        "explication": "Sans elle, un téléphone affiche la page comme sur un grand écran, en tout petit, et les media queries ne se déclenchent pas."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Dans une media query, que faut-il écrire ?",
+        "choix": [
+            {
+                "texte": "Toutes les propriétés de l'élément, pour être sûr",
+                "correct": false
+            },
+            {
+                "texte": "Seulement les propriétés qui changent par rapport aux règles normales",
+                "correct": true
+            },
+            {
+                "texte": "Seulement les propriétés de mise en page",
+                "correct": false
+            },
+            {
+                "texte": "Seulement les tailles de texte",
+                "correct": false
+            }
+        ],
+        "explication": "Les autres propriétés continuent de s'appliquer : inutile de les répéter."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quelle est la différence entre les sélecteurs `.menu.ouvert` et `.menu .ouvert` ?",
+        "reponse": "`.menu.ouvert` désigne un élément qui a les deux classes à la fois. `.menu .ouvert` désigne un élément de classe `ouvert` situé à l'intérieur d'un élément de classe `menu`.",
+        "explication": "Toute la différence tient à l'espace : sans espace, les deux classes sont sur le même élément ; avec un espace, il s'agit de deux éléments imbriqués."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Des éléments sont placés côte à côte avec Flexbox. Quelle propriété, avec quelle valeur, les empile verticalement sur mobile ?",
+        "reponse": "`flex-direction: column;`",
+        "explication": "Pensez aussi à retirer les largeurs en pourcentage, qui n'ont plus de sens une fois les éléments empilés."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quelle propriété, avec quelle valeur, masque complètement le bouton burger sur ordinateur ?",
+        "reponse": "`display: none;`",
+        "explication": "`visibility: hidden` cache aussi le bouton, mais il continue d'occuper sa place."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Sur mobile, votre page défile horizontalement. Quelle est la cause la plus probable ?",
+        "choix": [
+            {
+                "texte": "La balise `meta viewport` est en double",
+                "correct": false
+            },
+            {
+                "texte": "Un élément est plus large que l'écran",
+                "correct": true
+            },
+            {
+                "texte": "Une media query est mal placée",
+                "correct": false
+            },
+            {
+                "texte": "Le menu burger est ouvert",
+                "correct": false
+            }
+        ],
+        "explication": "Une largeur fixe trop grande, une image sans `max-width: 100%`… L'inspecteur permet de trouver l'élément qui dépasse."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>

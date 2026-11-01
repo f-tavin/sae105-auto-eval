@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 6 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 6</h1>
+        <p class="sous-titre">Le carrousel (bonus)</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 6.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qroc",
+        "intitule": "Un carrousel contient 5 diapositives, rangées dans la liste `diapos`. Quel est le numéro de la dernière diapositive ?",
+        "reponse": "4",
+        "explication": "La numérotation commence à 0 : de `diapos[0]` à `diapos[4]`."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Que vaut `diapos.length` pour ce même carrousel ?",
+        "reponse": "5",
+        "explication": "`length` donne le nombre d'éléments, pas le numéro du dernier."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pourquoi déclare-t-on `indexActuel` avec `let` plutôt qu'avec `const` ?",
+        "choix": [
+            {
+                "texte": "`let` est plus récent",
+                "correct": false
+            },
+            {
+                "texte": "Parce que sa valeur change à chaque clic",
+                "correct": true
+            },
+            {
+                "texte": "`const` ne peut pas contenir de nombre",
+                "correct": false
+            },
+            {
+                "texte": "C'est une question de style, les deux fonctionnent",
+                "correct": false
+            }
+        ],
+        "explication": "Une `const` ne peut pas recevoir de nouvelle valeur après sa déclaration."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Après `indexActuel = indexActuel + 1;`, quelle condition permet de revenir à la première diapositive au bon moment ?",
+        "choix": [
+            {
+                "texte": "`if (indexActuel > diapos.length)`",
+                "correct": false
+            },
+            {
+                "texte": "`if (indexActuel >= diapos.length)`",
+                "correct": true
+            },
+            {
+                "texte": "`if (indexActuel >= diapos.length - 1)`",
+                "correct": false
+            },
+            {
+                "texte": "`if (indexActuel == 4)`",
+                "correct": false
+            }
+        ],
+        "explication": "Avec `> diapos.length`, l'index atteindrait 5, qui n'existe pas. Avec `>= diapos.length - 1`, on reviendrait au début sans jamais afficher la dernière diapositive. `== 4` fonctionne, mais ne marcherait plus si on ajoutait une image."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quand on clique sur « précédent » depuis la première diapositive, quelle valeur faut-il donner à `indexActuel` ? Écrivez-la sans utiliser de nombre en dur.",
+        "reponse": "`diapos.length - 1`",
+        "explication": "C'est le numéro de la dernière diapositive, quel que soit le nombre d'images."
+    },
+    {
+        "type": "qroc",
+        "intitule": "`indexActuel` vaut 2. Quel texte doit afficher le compteur d'un carrousel de 5 images ?",
+        "reponse": "`3 / 5`",
+        "explication": "Le numéro affiché vaut `indexActuel + 1`, puisque la numérotation commence à 0."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pourquoi la fonction `afficherDiapo()` retire-t-elle la classe `active` de toutes les diapositives avant de l'ajouter à la bonne ?",
+        "choix": [
+            {
+                "texte": "Pour accélérer l'affichage",
+                "correct": false
+            },
+            {
+                "texte": "Sinon, l'ancienne diapositive resterait visible en plus de la nouvelle",
+                "correct": true
+            },
+            {
+                "texte": "Parce que `classList.add` ne fonctionne qu'après un `remove`",
+                "correct": false
+            },
+            {
+                "texte": "Ce n'est pas nécessaire",
+                "correct": false
+            }
+        ],
+        "explication": "Une seule diapositive doit avoir la classe `active` à la fois."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pourquoi regrouper le code d'affichage dans une fonction `afficherDiapo()` ?",
+        "choix": [
+            {
+                "texte": "C'est obligatoire en JavaScript",
+                "correct": false
+            },
+            {
+                "texte": "Parce que les deux boutons en ont besoin : on l'écrit une fois et on l'appelle depuis chacun",
+                "correct": true
+            },
+            {
+                "texte": "Pour que le code s'exécute au chargement de la page",
+                "correct": false
+            },
+            {
+                "texte": "Pour pouvoir utiliser une boucle",
+                "correct": false
+            }
+        ],
+        "explication": "Si on doit corriger ce code, on ne le corrige qu'à un seul endroit."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Dans un conteneur flex, à quoi sert `flex: 1` sur un élément ?",
+        "reponse": "À lui faire occuper tout l'espace restant dans le conteneur.",
+        "explication": "Dans le carrousel, la liste des images prend ainsi toute la place laissée par les deux boutons."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Dans le HTML du carrousel, on a oublié de mettre la classe `active` sur la première diapositive. `indexActuel` vaut 0 au départ. Que se passe-t-il ?",
+        "choix": [
+            {
+                "texte": "La première image s'affiche quand même, car `indexActuel` vaut 0",
+                "correct": false
+            },
+            {
+                "texte": "Aucune image n'est visible au chargement de la page, et un premier clic sur « suivant » affiche la deuxième image",
+                "correct": true
+            },
+            {
+                "texte": "Aucune image n'est visible au chargement, et un premier clic sur « suivant » affiche la première image",
+                "correct": false
+            },
+            {
+                "texte": "Une erreur s'affiche dans la console",
+                "correct": false
+            }
+        ],
+        "explication": "Au chargement, aucune diapositive n'a la classe `active` : le CSS les masque donc toutes, et `indexActuel` n'y change rien, puisqu'aucun code ne s'est encore exécuté. Au premier clic, `indexActuel` passe à 1 et `afficherDiapo()` affiche `diapos[1]`, c'est-à-dire la deuxième image. Aucune erreur n'apparaît : le bug est silencieux."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>

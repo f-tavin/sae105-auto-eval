@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 3 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 3</h1>
+        <p class="sous-titre">La mise en page avec Flexbox et Grid</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 3.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qcm1",
+        "intitule": "On applique `display: flex` à un élément. Quels éléments sont placés par Flexbox ?",
+        "choix": [
+            {
+                "texte": "L'élément lui-même",
+                "correct": false
+            },
+            {
+                "texte": "Ses enfants directs",
+                "correct": true
+            },
+            {
+                "texte": "Tous ses descendants, enfants et petits-enfants",
+                "correct": false
+            },
+            {
+                "texte": "Ses éléments voisins",
+                "correct": false
+            }
+        ],
+        "explication": "Seuls les enfants directs du conteneur sont concernés."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Dans un en-tête en Flexbox qui contient deux éléments, quelle propriété, avec quelle valeur, place le nom du site tout à gauche et le menu tout à droite ?",
+        "reponse": "`justify-content: space-between;`",
+        "explication": "L'espace libre est réparti entre les éléments : le premier est collé à gauche, le dernier à droite."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Dans un conteneur flex en ligne, une image est étirée sur toute la hauteur du texte voisin. Quelle propriété du conteneur en est responsable ?",
+        "choix": [
+            {
+                "texte": "`justify-content`",
+                "correct": false
+            },
+            {
+                "texte": "`flex-direction`",
+                "correct": false
+            },
+            {
+                "texte": "`align-items`, qui vaut `stretch` par défaut",
+                "correct": true
+            },
+            {
+                "texte": "`gap`",
+                "correct": false
+            }
+        ],
+        "explication": "`align-items: stretch` étire les éléments perpendiculairement à l'axe principal. Avec `center` ou `flex-start`, l'image garde ses proportions."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Écrivez la déclaration qui crée une grille de 4 colonnes égales.",
+        "reponse": "`grid-template-columns: repeat(4, 1fr);`",
+        "explication": "`grid-template-columns: 1fr 1fr 1fr 1fr;` est équivalent."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Écrivez la déclaration qui fait occuper 2 colonnes à un élément d'une grille.",
+        "reponse": "`grid-column: span 2;`",
+        "explication": "Sur le même principe, `grid-row: span 2;` lui fait occuper 2 rangées."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Une grille de 900 px de large, sans `gap`, a pour colonnes `2fr 1fr`. Quelle est la largeur de chaque colonne ?",
+        "reponse": "600 px et 300 px.",
+        "explication": "L'espace est divisé en 3 parts : la première colonne en prend 2, la seconde 1."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Une grille de 3 colonnes contient 7 éléments. Combien de rangées compte-t-elle ?",
+        "choix": [
+            {
+                "texte": "2",
+                "correct": false
+            },
+            {
+                "texte": "3",
+                "correct": true
+            },
+            {
+                "texte": "7",
+                "correct": false
+            },
+            {
+                "texte": "21",
+                "correct": false
+            }
+        ],
+        "explication": "3 éléments par rangée : 3 + 3 + 1. La dernière rangée n'a qu'un élément."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Sans `box-sizing: border-box`, quelle est la largeur totale d'un élément qui a `width: 300px`, `padding: 20px` et `border: 2px solid` ?",
+        "reponse": "344 px",
+        "explication": "300 + 20 × 2 + 2 × 2 = 344. Avec `border-box`, il ferait exactement 300 px."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Comment centrer horizontalement un bloc et l'empêcher de dépasser 1100 px de large ?",
+        "choix": [
+            {
+                "texte": "`text-align: center;`",
+                "correct": false
+            },
+            {
+                "texte": "`max-width: 1100px; margin: 0 auto;`",
+                "correct": true
+            },
+            {
+                "texte": "`width: 1100px; padding: auto;`",
+                "correct": false
+            },
+            {
+                "texte": "`display: flex; max-width: 1100px;`",
+                "correct": false
+            }
+        ],
+        "explication": "Les marges automatiques à gauche et à droite se partagent l'espace restant. `text-align` centre le texte à l'intérieur d'un bloc, pas le bloc lui-même."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pour quelle zone Grid est-il plus adapté que Flexbox ?",
+        "choix": [
+            {
+                "texte": "Une barre de navigation",
+                "correct": false
+            },
+            {
+                "texte": "Un logo à gauche et un menu à droite",
+                "correct": false
+            },
+            {
+                "texte": "Une galerie de cartes organisée en lignes et en colonnes",
+                "correct": true
+            },
+            {
+                "texte": "Un bouton et son icône côte à côte",
+                "correct": false
+            }
+        ],
+        "explication": "Grid gère deux dimensions à la fois. Flexbox est fait pour aligner des éléments sur une seule ligne ou une seule colonne."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>

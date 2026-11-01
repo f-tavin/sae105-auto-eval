@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 1 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 1</h1>
+        <p class="sous-titre">La structure HTML</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 1.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qcm1",
+        "intitule": "Quelle balise utiliser pour regrouper les liens de navigation principaux du site ?",
+        "choix": [
+            {
+                "texte": "`menu`",
+                "correct": false
+            },
+            {
+                "texte": "`nav`",
+                "correct": true
+            },
+            {
+                "texte": "`header`",
+                "correct": false
+            },
+            {
+                "texte": "`aside`",
+                "correct": false
+            }
+        ],
+        "explication": "`nav` signale un bloc de navigation. On le place souvent dans le `header`, mais `header` désigne l'en-tête dans son ensemble."
+    },
+    {
+        "type": "qcmN",
+        "intitule": "Parmi ces balises, lesquelles sont des balises sémantiques ?",
+        "choix": [
+            {
+                "texte": "`section`",
+                "correct": true
+            },
+            {
+                "texte": "`div`",
+                "correct": false
+            },
+            {
+                "texte": "`article`",
+                "correct": true
+            },
+            {
+                "texte": "`span`",
+                "correct": false
+            },
+            {
+                "texte": "`footer`",
+                "correct": true
+            }
+        ],
+        "explication": "`div` et `span` ne donnent aucune information sur leur contenu : elles servent uniquement à la mise en forme."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quel attribut de la balise `img` permet de décrire l'image aux personnes qui ne peuvent pas la voir ?",
+        "reponse": "`alt`",
+        "explication": "Le texte de l'attribut `alt` est lu par les lecteurs d'écran. Il est aussi affiché si l'image ne se charge pas."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Une actualité, avec son titre, sa date et son texte, aurait du sens même publiée seule ailleurs. Quelle balise lui convient ?",
+        "choix": [
+            {
+                "texte": "`section`",
+                "correct": false
+            },
+            {
+                "texte": "`article`",
+                "correct": true
+            },
+            {
+                "texte": "`aside`",
+                "correct": false
+            },
+            {
+                "texte": "`div`",
+                "correct": false
+            }
+        ],
+        "explication": "`article` désigne un contenu autonome. `section` regroupe une partie thématique de la page."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "La fiche technique du jeu, placée à côté des actualités, apporte des informations secondaires par rapport au contenu principal. Quelle balise lui convient ?",
+        "choix": [
+            {
+                "texte": "`section`",
+                "correct": false
+            },
+            {
+                "texte": "`article`",
+                "correct": false
+            },
+            {
+                "texte": "`aside`",
+                "correct": true
+            },
+            {
+                "texte": "`footer`",
+                "correct": false
+            }
+        ],
+        "explication": "`aside` désigne un contenu en marge du contenu principal."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Écrivez le lien du menu qui mène à la section `<section id=\"faq\">`.",
+        "reponse": "`<a href=\"#faq\">FAQ</a>`",
+        "explication": "Le texte du lien peut varier. Le `#` suivi de l'`id` crée une ancre vers cet élément."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quelles balises utiliser pour associer une légende à une image ?",
+        "reponse": "`figure` et `figcaption`",
+        "explication": "On place l'image et la légende (`figcaption`) à l'intérieur de `figure`."
+    },
+    {
+        "type": "qcmN",
+        "intitule": "Parmi ces éléments, lesquels doivent se trouver dans le `head` ?",
+        "choix": [
+            {
+                "texte": "`title`",
+                "correct": true
+            },
+            {
+                "texte": "`meta charset`",
+                "correct": true
+            },
+            {
+                "texte": "`h1`",
+                "correct": false
+            },
+            {
+                "texte": "le `link` vers la feuille de style",
+                "correct": true
+            },
+            {
+                "texte": "`footer`",
+                "correct": false
+            }
+        ],
+        "explication": "Le `head` contient les informations sur la page, pas son contenu visible. `h1` et `footer` vont dans le `body`."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Dans un tableau, quelle balise utiliser pour une cellule d'en-tête de colonne ?",
+        "choix": [
+            {
+                "texte": "`td`",
+                "correct": false
+            },
+            {
+                "texte": "`th`",
+                "correct": true
+            },
+            {
+                "texte": "`thead`",
+                "correct": false
+            },
+            {
+                "texte": "`tr`",
+                "correct": false
+            }
+        ],
+        "explication": "`thead` regroupe la ligne d'en-tête, mais chaque cellule de cette ligne est un `th`."
+    },
+    {
+        "type": "qroc",
+        "intitule": "À quoi sert l'attribut `datetime` dans `<time datetime=\"2025-04-10\">10 avril 2025</time>` ?",
+        "reponse": "À donner la date dans un format lisible par les machines (année-mois-jour).",
+        "explication": "Les moteurs de recherche, par exemple, peuvent ainsi comprendre la date. Le texte entre les balises reste celui qui s'affiche pour le lecteur."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>

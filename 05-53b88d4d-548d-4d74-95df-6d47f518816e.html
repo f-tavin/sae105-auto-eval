@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 5 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 5</h1>
+        <p class="sous-titre">JavaScript, premières interactions</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 5.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qcm1",
+        "intitule": "Que fait `element.classList.toggle(\"visible\")` ?",
+        "choix": [
+            {
+                "texte": "Ajoute toujours la classe `visible`",
+                "correct": false
+            },
+            {
+                "texte": "Retire toujours la classe `visible`",
+                "correct": false
+            },
+            {
+                "texte": "Ajoute la classe si elle est absente, la retire si elle est présente",
+                "correct": true
+            },
+            {
+                "texte": "Vérifie si l'élément a la classe `visible`",
+                "correct": false
+            }
+        ],
+        "explication": "`toggle` signifie « basculer » : chaque appel inverse l'état précédent."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Un secret est masqué au chargement de la page. Le bouton utilise `toggle`. On clique 3 fois. Le secret est-il visible ?",
+        "choix": [
+            {
+                "texte": "Oui",
+                "correct": true
+            },
+            {
+                "texte": "Non",
+                "correct": false
+            }
+        ],
+        "explication": "1er clic : visible. 2e clic : masqué. 3e clic : visible."
+    },
+    {
+        "type": "qcmN",
+        "intitule": "La console affiche `Uncaught TypeError: bouton is null`. Quelles peuvent en être les causes ?",
+        "choix": [
+            {
+                "texte": "Le sélecteur est mal écrit",
+                "correct": true
+            },
+            {
+                "texte": "L'élément n'existe pas dans le HTML",
+                "correct": true
+            },
+            {
+                "texte": "La balise `script` n'a pas l'attribut `defer`",
+                "correct": true
+            },
+            {
+                "texte": "Le CSS ne contient aucune règle pour la classe ajoutée",
+                "correct": false
+            }
+        ],
+        "explication": "Dans les trois premiers cas, `querySelector` ne trouve rien et renvoie `null`. Une règle CSS manquante ne provoque aucune erreur dans la console."
+    },
+    {
+        "type": "qroc",
+        "intitule": "À quoi sert l'attribut `defer` de la balise `script` ?",
+        "reponse": "À exécuter le script seulement après que le navigateur a lu tout le HTML.",
+        "explication": "Sans lui, le script peut chercher des éléments qui n'existent pas encore."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Écrivez l'instruction qui sélectionne l'élément dont l'`id` est `secret` et le range dans une constante `secret`.",
+        "reponse": "`const secret = document.querySelector(\"#secret\");`",
+        "explication": "`const secret = document.getElementById(\"secret\");` est équivalent."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Quelle est la différence entre `querySelector` et `querySelectorAll` ?",
+        "choix": [
+            {
+                "texte": "Aucune",
+                "correct": false
+            },
+            {
+                "texte": "`querySelector` renvoie le premier élément trouvé, `querySelectorAll` renvoie une liste de tous les éléments trouvés",
+                "correct": true
+            },
+            {
+                "texte": "`querySelectorAll` est plus rapide",
+                "correct": false
+            },
+            {
+                "texte": "`querySelector` ne fonctionne qu'avec les `id`",
+                "correct": false
+            }
+        ],
+        "explication": "Avec `querySelectorAll`, il faut ensuite parcourir la liste avec une boucle pour agir sur chaque élément."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Que se passe-t-il avec `document.querySelectorAll(\".faq-item\").addEventListener(\"click\", …)` ?",
+        "choix": [
+            {
+                "texte": "Tous les articles de la FAQ réagissent au clic",
+                "correct": false
+            },
+            {
+                "texte": "Seul le premier article réagit",
+                "correct": false
+            },
+            {
+                "texte": "Une erreur s'affiche : on ne peut pas mettre un écouteur sur une liste entière",
+                "correct": true
+            },
+            {
+                "texte": "Rien, et aucune erreur ne s'affiche",
+                "correct": false
+            }
+        ],
+        "explication": "Il faut parcourir la liste avec une boucle et mettre un écouteur sur chaque élément."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Pourquoi les liens du menu utilisent-ils `classList.remove(\"ouvert\")` plutôt que `toggle` ?",
+        "choix": [
+            {
+                "texte": "`remove` est plus rapide",
+                "correct": false
+            },
+            {
+                "texte": "Avec `toggle`, cliquer sur un lien alors que le menu est fermé l'ouvrirait",
+                "correct": true
+            },
+            {
+                "texte": "`toggle` ne fonctionne pas dans une boucle",
+                "correct": false
+            },
+            {
+                "texte": "Il n'y a aucune différence",
+                "correct": false
+            }
+        ],
+        "explication": "Le clic sur un lien doit toujours fermer le menu, quel que soit son état."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Le JavaScript ajoute bien la classe `ouvert` à l'élément (on la voit dans l'inspecteur), il n'y a aucune erreur dans la console, mais rien ne change à l'écran. Quelle est la cause probable ?",
+        "reponse": "Le CSS ne définit aucun style pour cette classe.",
+        "explication": "C'est souvent un nom écrit différemment dans le CSS (par exemple `ouverte` au lieu de `ouvert`) ou un sélecteur incorrect."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Lisez ce sélecteur en une phrase : `.faq-item.ouvert .faq-reponse`",
+        "reponse": "L'élément de classe `faq-reponse` situé à l'intérieur d'un élément qui a à la fois les classes `faq-item` et `ouvert`.",
+        "explication": "Un sélecteur se lit plus facilement de droite à gauche : on part de l'élément visé, puis on remonte vers ses parents."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>

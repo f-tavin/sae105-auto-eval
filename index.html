@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Rien à voir ici – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles propres à cette page, en complément de style.css */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .rien-a-voir {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .panneau-message {
+            max-width: 560px;
+            padding: 40px 30px;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #d5ccb5;
+            border-top: 6px solid #c8a24a;
+            box-shadow: 0 8px 20px rgba(11, 31, 58, 0.12);
+        }
+
+        .panneau-attention {
+            width: 140px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .panneau-message h2 {
+            margin: 0 0 15px 0;
+            font-family: "Cinzel", Georgia, serif;
+            font-size: 28px;
+            line-height: 1.2;
+            color: #0b1f3a;
+        }
+
+        .panneau-message p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluations</h1>
+        <p class="sous-titre">Projet web Blue Prince</p>
+    </header>
+
+    <main class="rien-a-voir">
+        <section class="panneau-message">
+            <!-- Panneau « attention » dessiné en SVG -->
+            <svg class="panneau-attention" viewBox="0 0 120 106" role="img" aria-label="Panneau attention">
+                <path d="M60 6 L114 100 L6 100 Z" fill="#c8a24a" stroke="#0b1f3a" stroke-width="7" stroke-linejoin="round"/>
+                <rect x="54" y="36" width="12" height="36" rx="5" fill="#0b1f3a"/>
+                <circle cx="60" cy="85" r="7" fill="#0b1f3a"/>
+            </svg>
+            <h2>Il n'y a rien à voir ici</h2>
+            <p>Pour accéder à l'auto-évaluation de la partie en cours, utilisez le lien fourni par votre enseignant.</p>
+        </section>
+    </main>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+</body>
+</html>

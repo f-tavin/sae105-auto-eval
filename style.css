@@ -1,0 +1,342 @@
+/* =========================================================
+   AUTO-ÉVALUATION – Feuille de style commune aux 6 parties
+   Charte reprise du site Blue Prince.
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Source Sans 3", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: #1d2433;
+    background-color: #f3efe4;
+}
+
+code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.92em;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background-color: rgba(11, 31, 58, 0.08);
+    color: #0b1f3a;
+    overflow-wrap: anywhere;
+}
+
+
+/* ===== EN-TÊTE ===== */
+
+.entete {
+    padding: 50px 20px 40px 20px;
+    text-align: center;
+    background-color: #0b1f3a;
+    color: #f3efe4;
+    border-bottom: 4px solid #c8a24a;
+}
+
+.entete h1 {
+    margin: 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 38px;
+    line-height: 1.2;
+    color: #f3efe4;
+}
+
+.sous-titre {
+    margin: 8px 0 20px 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 20px;
+    color: #c8a24a;
+}
+
+.consigne {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.consigne-corrige {
+    display: none;
+}
+
+.mode-corrige .consigne-questions {
+    display: none;
+}
+
+.mode-corrige .consigne-corrige {
+    display: block;
+}
+
+
+/* ===== QUESTIONS ===== */
+
+.question {
+    padding: 40px 20px;
+}
+
+/* Une question sur deux a un fond différent, comme les sections du site */
+.question:nth-child(even) {
+    background-color: #e7e1d1;
+}
+
+.question > * {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.entete-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.numero {
+    font-family: "Cinzel", Georgia, serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1e4a7a;
+}
+
+.type {
+    padding: 2px 10px;
+    border: 1px solid #c8a24a;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #7a6a3e;
+}
+
+.intitule {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-family: "Source Sans 3", Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0b1f3a;
+}
+
+
+/* ===== PROPOSITIONS (QCM) ===== */
+
+.choix {
+    list-style-type: none;
+    padding: 0;
+}
+
+.choix li {
+    margin-bottom: 10px;
+}
+
+.choix label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 1px solid #d5ccb5;
+    cursor: pointer;
+}
+
+.choix label:hover {
+    border-color: #c8a24a;
+}
+
+.choix input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin: 3px 0 0 0;
+    accent-color: #1e4a7a;
+    cursor: pointer;
+}
+
+/* La proposition cochée est mise en avant */
+.choix label:has(input:checked) {
+    border-color: #1e4a7a;
+    box-shadow: inset 4px 0 0 #1e4a7a;
+}
+
+
+/* ===== ZONE DE SAISIE (QROC) ===== */
+
+.saisie {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-family: "Source Sans 3", Arial, sans-serif;
+    font-size: 17px;
+    color: #1d2433;
+    background-color: #ffffff;
+    border: 1px solid #d5ccb5;
+    resize: vertical;
+}
+
+.saisie:focus {
+    outline: 2px solid #c8a24a;
+    border-color: #c8a24a;
+}
+
+
+/* ===== CORRIGÉ ===== */
+
+/* Caché tant que l'étudiant n'a pas validé */
+.corrige {
+    display: none;
+}
+
+.mode-corrige .corrige {
+    display: block;
+    margin-top: 20px;
+    padding: 20px 24px;
+    background-color: #0b1f3a;
+    color: #f3efe4;
+    border-left: 6px solid #c8a24a;
+}
+
+.mode-corrige .corrige code {
+    background-color: rgba(243, 239, 228, 0.15);
+    color: #f3efe4;
+}
+
+.titre-corrige {
+    margin: 0 0 6px 0;
+    font-family: "Cinzel", Georgia, serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #c8a24a;
+}
+
+.bonnes-reponses {
+    margin: 0 0 14px 0;
+    padding-left: 22px;
+    font-weight: 600;
+}
+
+.reponse-attendue {
+    margin: 0 0 14px 0;
+    font-weight: 600;
+}
+
+.explication {
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid #1e4a7a;
+}
+
+/* En mode corrigé, les propositions ne sont plus cliquables */
+.mode-corrige .choix label {
+    cursor: default;
+    opacity: 0.85;
+}
+
+.mode-corrige .choix label:hover {
+    border-color: #d5ccb5;
+}
+
+.mode-corrige .choix label:has(input:checked) {
+    opacity: 1;
+    border-color: #1e4a7a;
+}
+
+.marque {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: 1px 10px;
+    border-radius: 20px;
+    background-color: #1e4a7a;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.votre-reponse {
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 1px solid #d5ccb5;
+    border-left: 4px solid #1e4a7a;
+}
+
+.votre-reponse p {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.votre-reponse .titre-corrige {
+    color: #1e4a7a;
+}
+
+.sans-reponse {
+    font-style: italic;
+    color: #7a6a3e;
+}
+
+
+/* ===== BOUTON ===== */
+
+.validation {
+    padding: 40px 20px 60px 20px;
+    text-align: center;
+}
+
+.bouton {
+    padding: 14px 32px;
+    border: 2px solid #c8a24a;
+    border-radius: 4px;
+    background-color: #c8a24a;
+    color: #0b1f3a;
+    font-family: "Source Sans 3", Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.bouton:hover {
+    background-color: transparent;
+    color: #0b1f3a;
+}
+
+
+/* ===== PIED DE PAGE ===== */
+
+.pied {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #0b1f3a;
+    color: #f3efe4;
+}
+
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 767px) {
+
+    .entete h1 {
+        font-size: 28px;
+    }
+
+    .sous-titre {
+        font-size: 17px;
+    }
+
+    .question {
+        padding: 30px 16px;
+    }
+
+    .intitule {
+        font-size: 18px;
+    }
+}

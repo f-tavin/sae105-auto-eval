@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>Auto-évaluation Partie 2 – Projet Blue Prince</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="entete">
+        <h1>Auto-évaluation Partie 2</h1>
+        <p class="sous-titre">Le CSS de base</p>
+        <p class="consigne consigne-questions">Répondez aux 10 questions, puis validez pour afficher le corrigé. Rien n'est noté : l'objectif est de repérer ce que vous avez compris et ce qu'il faut revoir.</p>
+        <p class="consigne consigne-corrige">Comparez vos réponses au corrigé affiché sous chaque question. Si une notion vous échappe encore, revoyez-la dans la fiche de la partie ou demandez à l'enseignant.</p>
+    </header>
+
+    <main id="questions"></main>
+
+    <div class="validation">
+        <button id="valider" class="bouton">Valider mes réponses</button>
+    </div>
+
+    <footer class="pied">
+        <p>Projet web Blue Prince – BUT MMI</p>
+    </footer>
+
+    <script>
+        /* Les 10 questions de la partie 2.
+           type : "qcm1" (une seule réponse), "qcmN" (plusieurs réponses) ou "qroc" (réponse courte)
+           Le texte entre accents graves (`...`) s'affiche comme du code. */
+        const questions = [
+    {
+        "type": "qcm1",
+        "intitule": "Que sélectionne `.carte` ?",
+        "choix": [
+            {
+                "texte": "Les éléments dont l'`id` est `carte`",
+                "correct": false
+            },
+            {
+                "texte": "Les éléments qui ont la classe `carte`",
+                "correct": true
+            },
+            {
+                "texte": "Les balises `<carte>`",
+                "correct": false
+            },
+            {
+                "texte": "Le premier élément de classe `carte`",
+                "correct": false
+            }
+        ],
+        "explication": "Le point désigne une classe, le `#` désigne un `id`."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Quelle est la différence entre `padding` et `margin` ?",
+        "choix": [
+            {
+                "texte": "Aucune, ce sont des synonymes",
+                "correct": false
+            },
+            {
+                "texte": "`padding` est l'espace à l'intérieur de la bordure, `margin` l'espace à l'extérieur",
+                "correct": true
+            },
+            {
+                "texte": "`padding` est l'espace à l'extérieur de la bordure, `margin` l'espace à l'intérieur",
+                "correct": false
+            },
+            {
+                "texte": "`padding` ne s'applique qu'au texte",
+                "correct": false
+            }
+        ],
+        "explication": "Une couleur de fond s'étend sous le `padding`, mais pas sous la `margin`."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Écrivez le sélecteur qui désigne une ligne sur deux (les lignes paires) dans le corps d'un tableau.",
+        "reponse": "`tbody tr:nth-child(even)`",
+        "explication": "`2n` fonctionne aussi à la place de `even`."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quelle propriété, avec quelle valeur, supprime les puces d'une liste ?",
+        "reponse": "`list-style-type: none;`",
+        "explication": "Les éléments de la liste restent les uns sous les autres, simplement sans puce devant."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Quelle propriété, avec quelle valeur, fusionne les bordures des cellules d'un tableau ?",
+        "reponse": "`border-collapse: collapse;`",
+        "explication": "Sans elle, chaque cellule a sa propre bordure et les traits sont doublés."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Avec `font-family: \"Cinzel\", Georgia, serif;`, que se passe-t-il si la police Cinzel ne se charge pas ?",
+        "choix": [
+            {
+                "texte": "Le texte ne s'affiche pas",
+                "correct": false
+            },
+            {
+                "texte": "Le navigateur utilise Georgia, et si Georgia n'est pas installée, une police à empattements par défaut",
+                "correct": true
+            },
+            {
+                "texte": "Le navigateur utilise toujours la police `serif`",
+                "correct": false
+            },
+            {
+                "texte": "Le navigateur affiche une erreur",
+                "correct": false
+            }
+        ],
+        "explication": "Le navigateur essaie les polices dans l'ordre. La famille générique placée en dernier garantit un résultat proche."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Que sélectionne `li:last-child` ?",
+        "choix": [
+            {
+                "texte": "Le dernier enfant de chaque `li`",
+                "correct": false
+            },
+            {
+                "texte": "Un `li` qui est le dernier enfant de son parent",
+                "correct": true
+            },
+            {
+                "texte": "Le dernier `li` de toute la page",
+                "correct": false
+            },
+            {
+                "texte": "Tous les `li` sauf le premier",
+                "correct": false
+            }
+        ],
+        "explication": "La pseudo-classe s'applique à l'élément écrit juste avant elle, le `li`, pas à ses enfants."
+    },
+    {
+        "type": "qroc",
+        "intitule": "Dans le code couleur `#c8a24a`, que représentent les trois paires de caractères `c8`, `a2` et `4a` ?",
+        "reponse": "La quantité de rouge, de vert et de bleu, dans cet ordre.",
+        "explication": "Chaque quantité est écrite en hexadécimal, de `00` (aucune) à `ff` (le maximum)."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Deux règles donnent une couleur différente au même élément : `p { color: red; }` en ligne 10 et `p { color: blue; }` en ligne 50. Quelle couleur s'affiche ?",
+        "choix": [
+            {
+                "texte": "Rouge",
+                "correct": false
+            },
+            {
+                "texte": "Bleu",
+                "correct": true
+            },
+            {
+                "texte": "Un mélange des deux",
+                "correct": false
+            },
+            {
+                "texte": "La couleur par défaut du navigateur",
+                "correct": false
+            }
+        ],
+        "explication": "À sélecteur équivalent, la dernière règle écrite l'emporte. C'est le principe de la cascade."
+    },
+    {
+        "type": "qcm1",
+        "intitule": "Quelle est la différence entre un `id` et une classe ?",
+        "choix": [
+            {
+                "texte": "Aucune",
+                "correct": false
+            },
+            {
+                "texte": "Un `id` est unique dans la page, une classe peut être utilisée sur plusieurs éléments",
+                "correct": true
+            },
+            {
+                "texte": "Une classe est unique dans la page, un `id` peut être utilisé sur plusieurs éléments",
+                "correct": false
+            },
+            {
+                "texte": "Un `id` ne s'utilise qu'en JavaScript",
+                "correct": false
+            }
+        ],
+        "explication": "C'est pour ça qu'on met en forme avec des classes, réutilisables, et qu'on réserve les `id` aux ancres et au JavaScript."
+    }
+];
+    </script>
+    <script src="autoeval.js"></script>
+</body>
+</html>
